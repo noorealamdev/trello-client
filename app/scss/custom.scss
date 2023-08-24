@@ -1,0 +1,53 @@
+//Trello Board
+.custom-kanban-board {
+  height: calc(100vh - 162px);
+}
+.custom-kanban-board .kanban-board-column {
+  height: calc(100vh - 162px);
+  overflow-y: scroll;
+}
+.card-ghost {
+  transition: transform 0.18s ease;
+  transform: rotateZ(5deg)
+}
+.card-ghost-drop{
+  transition: transform 0.18s ease-in-out;
+  transform: rotateZ(5deg)
+}
+.opacity-ghost {
+  transition: all .18s ease;
+  opacity: 0.8;
+  cursor: ns-resize;
+  transform: rotateZ(3deg);
+  background-color: cornflowerblue;
+  box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.3);
+}
+.opacity-ghost-drop {
+  opacity: 1;
+  transform: rotateZ(0deg);
+  background-color: white;
+  box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.0);
+}
+.drop-preview {
+  background-color: rgba(150, 150, 200, 0.1);
+  border: 1px dashed #abc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.column-drop-preview {
+  background-color: rgba(150, 150, 200, 0.1);
+  border: 1px dashed #abc;
+  margin: 5px 50px 5px 5px;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+.kanban-board-column {
+  width: 300px;
+  margin-right: 20px;
+}
+.kanban-board-column .card {
+  margin-bottom: 10px;
+}
+.kanban-board-column .column-drag-handle {
+  cursor: grab;
+}
