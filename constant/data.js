@@ -7,7 +7,7 @@ export const boardInitData = {
         {
           id: 'column-1',
           boardId: 'board-1',
-          title: 'Todo 1',
+          title: 'Todo (delivery department)',
           cardOrder: ['card-1', 'card-2', 'card-3'],
           cards: [
             {

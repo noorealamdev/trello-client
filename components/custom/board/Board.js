@@ -1,16 +1,27 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Column from "./Column";
 import {boardInitData} from "../../../constant/data";
 import {mapOrder} from "../../../utils/sort";
 import _ from 'lodash';
 import { Container, Draggable } from 'react-smooth-dnd';
 import {applyDrag} from "../../../utils/dragDrop";
+import Icon from "../../ui/Icon";
+import {ref} from "yup";
 
 export default function Board() {
     const [board, setBoard] = useState({});
     const [columns, setColumns] = useState([]);
+    const [showAddColumnField, setShowAddColumnField] = useState(false);
+    const columnTitleInputRef = useRef(null);
+    const [columnTitleValue, setColumnTitleValue] = useState("");
+
+    useEffect(() => {
+        if (showAddColumnField === true && columnTitleInputRef && columnTitleInputRef.current) {
+            columnTitleInputRef.current.focus();
+        }
+    }, [showAddColumnField])
 
     useEffect( () => {
         const boardData = boardInitData.boards.find(board => board.id === 'board-1');
@@ -40,6 +51,27 @@ export default function Board() {
         }
     }
 
+    const handleAddColumnSaveBtn = () => {
+        if (!columnTitleValue) {
+            if (columnTitleInputRef && columnTitleInputRef.current) {
+                columnTitleInputRef.current.focus();
+            }
+        }
+
+        // Update board columns
+        const _columns = _.cloneDeep(columns);
+        _columns.push({
+            id: 'column-4',
+            boardId: 'board-1',
+            title: columnTitleValue,
+            cards: []
+        })
+
+        setColumns(_columns);
+        setColumnTitleValue("");
+        setShowAddColumnField(false);
+    }
+
     if ( _.isEmpty(board) ) {
         return (
             <h2>You don't have any board created</h2>
@@ -48,7 +80,7 @@ export default function Board() {
 
     return (
         <>
-            <div className="custom-kanban-board flex space-x-6 overflow-hidden overflow-x-auto pb-4 rtl:space-x-reverse">
+            <div className="custom-kanban-board flex overflow-hidden overflow-x-auto pb-4 rtl:space-x-reverse">
                 <Container
                     orientation="horizontal"
                     onDrop={onColumnDrop}
@@ -72,8 +104,35 @@ export default function Board() {
                         </>
                     )
                 })}
-
                 </Container>
+
+                <div className="add-board-new-column">
+                    <div className="w-[270px] px-2 py-3 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300">
+
+                        { showAddColumnField === false ?
+                            (
+                                <div className="flex items-center cursor-pointer" onClick={() => setShowAddColumnField(true)}>
+                                    <Icon className="mr-1" icon="heroicons:plus" /> <span className="select-none">Add another column</span>
+                                </div>
+                            ) : (
+                                <div>
+                                    <input
+                                        ref={columnTitleInputRef}
+                                        type="text"
+                                        className="form-control mb-2 h-[32px] text-sm"
+                                        placeholder="Enter column title..."
+                                        value={columnTitleValue}
+                                        onChange={ event => setColumnTitleValue(event.target.value) }
+                                    />
+                                    <div className="flex items-center">
+                                        <button onClick={handleAddColumnSaveBtn} className="btn btn-sm btn-primary hover:">Save</button> <span onClick={() => { setShowAddColumnField(false); setColumnTitleValue("")}}><Icon className="ml-3 h-8 w-8 cursor-pointer" icon="material-symbols:cancel-outline" /></span>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+
             </div>
         </>
     )

@@ -41,13 +41,15 @@
   border-radius: 10px;
   margin-right: 20px;
 }
-.kanban-board-column {
-  width: 300px;
-  margin-right: 20px;
+.kanban-board-column, .add-board-new-column {
+  width: 280px;
+  margin-right: 15px;
 }
 .kanban-board-column .card {
   margin-bottom: 10px;
 }
-.kanban-board-column .column-drag-handle {
-  cursor: grab;
+.kanban-board-column .add-a-card {
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
 }
