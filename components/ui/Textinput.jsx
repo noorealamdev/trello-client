@@ -55,8 +55,8 @@ const Textinput = ({
         {name && !isMask && (
           <input
             type={type === "password" && open === true ? "text" : type}
-            {...register(name)}
             {...rest}
+            name={name}
             className={`${
               error ? " has-error" : " "
             } form-control py-2 ${className}  `}
@@ -82,7 +82,6 @@ const Textinput = ({
         )}
         {name && isMask && (
           <Cleave
-            {...register(name)}
             {...rest}
             placeholder={placeholder}
             options={options}
@@ -125,17 +124,6 @@ const Textinput = ({
               )}
             </span>
           )}
-
-          {error && (
-            <span className="text-danger-500">
-              <Icon icon="heroicons-outline:information-circle" />
-            </span>
-          )}
-          {validate && (
-            <span className="text-success-500">
-              <Icon icon="bi:check-lg" />
-            </span>
-          )}
         </div>
       </div>
       {/* error and success message*/}
@@ -147,7 +135,7 @@ const Textinput = ({
               : " text-danger-500 block text-sm"
           }`}
         >
-          {error.message}
+          {error}
         </div>
       )}
       {/* validated and success message*/}

@@ -51,7 +51,7 @@ export default function Board() {
         }
     }
 
-    const handleAddColumnSaveBtn = () => {
+    const handleAddColumnSubmit = () => {
         if (!columnTitleValue) {
             if (columnTitleInputRef && columnTitleInputRef.current) {
                 columnTitleInputRef.current.focus();
@@ -125,7 +125,7 @@ export default function Board() {
                                         onChange={ event => setColumnTitleValue(event.target.value) }
                                     />
                                     <div className="flex items-center">
-                                        <button onClick={handleAddColumnSaveBtn} className="btn btn-sm btn-primary hover:">Save</button> <span onClick={() => { setShowAddColumnField(false); setColumnTitleValue("")}}><Icon className="ml-3 h-8 w-8 cursor-pointer" icon="material-symbols:cancel-outline" /></span>
+                                        <button onClick={handleAddColumnSubmit} className="btn btn-sm btn-primary hover:">Save</button> <span onClick={() => { setShowAddColumnField(false); setColumnTitleValue("")}}><Icon className="ml-3 h-8 w-8 cursor-pointer" icon="material-symbols:cancel-outline" /></span>
                                     </div>
                                 </div>
                             )

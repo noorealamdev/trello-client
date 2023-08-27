@@ -1,3 +1,6 @@
+$board-column-width: 280px;
+$board-column-footer-border-radius: 12px; // rounded-xl === 12px
+
 //Trello Board
 .custom-kanban-board {
   height: calc(100vh - 162px);
@@ -42,14 +45,19 @@
   margin-right: 20px;
 }
 .kanban-board-column, .add-board-new-column {
-  width: 280px;
+  width: $board-column-width;
   margin-right: 15px;
 }
 .kanban-board-column .card {
   margin-bottom: 10px;
 }
-.kanban-board-column .add-a-card {
+.kanban-board-column .column-footer {
   position: absolute;
   bottom: 0;
-  padding: 10px;
+  width: $board-column-width;
+  border-bottom-left-radius: $board-column-footer-border-radius;
+  border-bottom-right-radius: $board-column-footer-border-radius;
+}
+.has-error {
+  border-color: red;
 }

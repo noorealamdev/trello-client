@@ -19,7 +19,7 @@ const Dropdown = ({
       link: "#",
     },
     {
-      label: "Something else here",
+      label: "Delete",
       link: "#",
     },
   ],
